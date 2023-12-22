@@ -174,13 +174,13 @@ export default class Timeline {
       const coordsArr = coords.trim().split(",");
 
       if (coordsArr[0].startsWith("[")) {
-        latNewValue = coordsArr[0].slice(1, coordsArr[0].length - 1);
+        latNewValue = coordsArr[0].slice(1, coordsArr[0].length);
       } else {
         latNewValue = coordsArr[0];
       }
 
       if (coordsArr[1].endsWith("]")) {
-        longNewValue = coordsArr[1].slice(1, coordsArr[1].length - 1);
+        longNewValue = coordsArr[1].slice(0, coordsArr[1].length - 1);
       } else {
         longNewValue = coordsArr[1];
       }
@@ -194,7 +194,7 @@ export default class Timeline {
       ) {
         return {
           valid: false,
-          message: "Поле не должно содержать букв или специальных символов.",
+          message: `Поле не должно содержать букв или специальных символов. ${coordsArr}`,
         };
       } else if (latitudeValue > 90) {
         return {

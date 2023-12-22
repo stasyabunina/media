@@ -15,11 +15,15 @@ test.each([
   expect(receivedMessage).toBe(expected);
 });
 
-test("testing if coords are valid", () => {
+test.each([
+  ["51.50851, -0.12572", true],
+  ["51.50851,-0.12572", true],
+  ["[51.50851, -0.12572]", true],
+])("testing if coords are valid", (value, expected) => {
   const timeline = new Timeline();
 
-  const value = "51.50851, -0.12572";
+  timeline.checkGeoValidation(value);
   const received = timeline.checkGeoValidation(value);
 
-  expect(received.valid).toBeTruthy();
+  expect(received.valid).toBe(expected);
 });
