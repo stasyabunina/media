@@ -4,7 +4,6 @@ export default class Timeline {
   constructor(element) {
     this.element = element;
     this.list = [];
-    this.coords = {};
   }
 
   init() {
@@ -20,11 +19,7 @@ export default class Timeline {
       if (this.input.value.trim() === "") {
         this.showCreateCardInputError();
       } else {
-        if (Object.keys(this.coords).length === 0) {
-          this.checkGeoLocation();
-        } else {
-          this.createCard(this.coords.latitude, this.coords.longitude);
-        }
+        this.checkGeoLocation();
       }
     });
   }
@@ -139,7 +134,6 @@ export default class Timeline {
 
       if (obj.valid) {
         this.createCard(obj.latitude, obj.longitude);
-        this.coords = { latitude: obj.latitude, longitude: obj.longitude };
         this.modalElement = null;
         modal.remove();
       } else {
